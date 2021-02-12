@@ -1,0 +1,19 @@
+version: "3.3"
+networks:
+  frontend:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+services:
+  consul:
+    networks:
+        frontend:
+           ipv4_address: 172.20.0.5
+    build: ./consul
+    ports:
+      - "8500:8500"
+
+  git2consul:
+    build: ./git2consul  
+    depends_on:
+      - consul
